@@ -15,6 +15,7 @@ def BuildIndex(DataPath, OutputPath):
 		for line in DataFile:
 			print("Process %s in line %s" %(line, LinePosition))
 			print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
+			#stemming line, not yet implemented
 			LinePosition = LinePosition + 1
 			updateNewIndexFrom(line, LinePosition)
 	print("Export index to %s" %OutputPath)
@@ -47,6 +48,7 @@ def updateDictionary(word, LinePosition, WordPosition):
 		
 			
 def createDictionaryValues(word, LinePosition, WordPosition):
+	global WordIndex
 	print("%s is a new word, add new word to dictionary" %word)
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	NewPositionEntry = (LinePosition, WordPosition)
@@ -55,9 +57,10 @@ def createDictionaryValues(word, LinePosition, WordPosition):
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	NewIndexEntry = [(word, 1), (word, NewPositionEntry)]
 	for word, NewEntry in NewIndexEntry: 
-		wordIndex[word].append(NewEntry)
+		WordIndex[word].append(NewEntry)
 
 def updateDictionaryValues(word, LinePosition, WordPosition):
+	global WordIndex
 	print("%s is already an index member, update %s value" %(word, word))
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	NewPositionEntry = (LinePosition, WordPosition)

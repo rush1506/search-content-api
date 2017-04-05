@@ -8,6 +8,7 @@ def getSearchResult(SearchString):
 	if (!isSearchable("../../../data/data.txt")):
 		WordIndex = BuildIndex("../../../data/data.txt", "../../index/index.txt")
 	SearchResult = SearchIndex(SearchString, WordIndex)
+	Display(SearchResult)
 	return SearchResult
 	
 def isValid(string):
