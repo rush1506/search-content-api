@@ -1,3 +1,2 @@
-import time
-print("test time at")
-time.strftime ('%l:%M%p %z on %b %d, %Y')
+from time import localtime, strftime
+print(strftime("%a, %d %b %Y %H:%M:%S", localtime()))
