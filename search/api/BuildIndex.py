@@ -1,7 +1,6 @@
 from codecs import open	
 from Normalize import Normalize
 from time import localtime, strftime
-import datrie
 from collections import defaultdict
 
 WordIndex = defaultdict(list)
@@ -21,6 +20,8 @@ def BuildIndex(DataPath, OutputPath):
 	print("Export index to %s" %OutputPath)
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	exportIndex(OutputPath)
+	global WordIndex
+	return WordIndex
 				
 
 def updateNewIndexFrom(CurrentLine, LinePosition):
@@ -71,4 +72,7 @@ def updateDictionaryValues(word, LinePosition, WordPosition):
 	print(NewPositionEntry)
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	return true
-			
+	
+def exportIndex
+	return true
+	#not implemented
