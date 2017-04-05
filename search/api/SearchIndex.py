@@ -1,5 +1,5 @@
 from pathlib import Path
-
+from Normalize import Normalize
 
 def isSearchable(DataPath):
 	DataFile = Path(DataPath)
@@ -7,4 +7,8 @@ def isSearchable(DataPath):
 		return true
 	else:
 		return false
-	
+
+def SearchIndex(SearchString, WordIndex):
+	WordList = getWordList(SearchString)
+	#do something, think later, I'm tired
+	for word in WordList:
