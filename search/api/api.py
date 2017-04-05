@@ -5,8 +5,8 @@ from SearchIndex import isSearchable
 def getSearchResult(SearchString):
 	if (!isValid(SearchString)):
 		return "no result found, search string is not valid"
-	if (!isSearchable("../data/data.txt")):
-		WordIndex = BuildIndex("../data/data.txt", "/result/index.txt")
+	if (!isSearchable("../../../data/data.txt")):
+		WordIndex = BuildIndex("../../../data/data.txt", "../../index/index.txt")
 	SearchResult = SearchIndex(SearchString, WordIndex)
 	return SearchResult
 	
