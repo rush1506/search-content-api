@@ -1,2 +1,3 @@
-from time import localtime, strftime
-print(strftime("%a, %d %b %Y %H:%M:%S", localtime()))
+a= 'a'
+b= 'b'
+print("%s %s"%(a, b))
