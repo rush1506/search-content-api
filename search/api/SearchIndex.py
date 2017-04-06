@@ -32,9 +32,16 @@ def trimSearchIndex(SearchStringIndex):
 
 def sortIndex(SearchStringIndex):
 	SortedIndex = defaultdict(list)
-	#Sort Index: rank Word position in index using distance heuristic
-	#Continue coding here
+	print("Begin finding document that contains search words")
+	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
+	SortedIndex = sortMatchPosition(SortedIndex)
+	print("Sort index based on priorities get from heuristic distance between words")
+	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
+	SortedIndex = prioritizeBasedOnHeuristicDistance(SortedIndex)
 	return SortedIndex
+	
+def sortMatchPosition(SortedIndex):
+	
 	
 		
 def getIndexFromDatabase(WordIndex, WordList):
