@@ -55,8 +55,15 @@ def sortIndex(SearchStringIndex, WordsCount):
 	print("Sort index based on single count in document")
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	SortedIndex = prioritizeBasedOnCount(SortedIndex)
+	rint("Sort index based on heuristic distance")
+	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
+	SortedIndex = prioritizeBasedDistance(SortedIndex)
 	return SortedIndex
 	
+def prioritizeBasedDistance(Index):
+	#not implemented
+	return Index
+
 def sortMatchPosition(Index, WordsCount):
 	SortedIndex = defaultdict(list)
 	k = 0
@@ -82,7 +89,12 @@ def sortMatchPosition(Index, WordsCount):
 def prioritizeBasedOnCount(Index)
 	for ChosenPosition in range(0, Index - 1):
 		for Position in range(1, Index):
+			print("Compare chosen position len: %s and position len %s" %(len(Index[ChosenPosition]), len(Index[Position]))
 			if len(Index[ChosenPosition]) < len(Index[Position]):
+				tmp = Index[Position]
+				Index[Position] = Index[ChosenPosition]
+				Index[ChosenPosition] = tmp
+	return Index
 				
 		
 	
