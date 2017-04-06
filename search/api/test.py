@@ -12,9 +12,7 @@ def foo():
 	NewPositionEntry = ('line', 'posds')
 	WordIndex[word].append(NewPositionEntry)
 	
-	print(WordIndex['test'])
-	WordIndex['test'].pop(1)
-	print(WordIndex['test'])
+	print(len(WordIndex[word]))
 		
 	#if (WordIndex[word][1] == WordIndex[word][2]):
 	#	print("test ok")

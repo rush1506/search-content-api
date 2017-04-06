@@ -55,7 +55,7 @@ def sortIndex(SearchStringIndex, WordsCount):
 	print("Sort index based on single count in document")
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	SortedIndex = prioritizeBasedOnCount(SortedIndex)
-	rint("Sort index based on heuristic distance")
+	rint("Sort index based on heuristic distance, not implemented yet")
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	SortedIndex = prioritizeBasedDistance(SortedIndex)
 	return SortedIndex
@@ -77,20 +77,22 @@ def sortMatchPosition(Index, WordsCount):
 					print(Position)
 					if ChosenPosition == Position:
 						SortedIndex[k].append(Position)
-						print("Pop position in %s", %j)
+						print("Pop position in %s" %j)
 						Index[j].pop(Position)
 		print("Add chosen position to sorted index")
 		SortedIndex[k].append(ChosenPosition)
-		print("Pop chosen position in %s", %i)
+		print("Pop chosen position in %s" %i)
 		WordsCount[i].pop(ChosenPosition)
 		k = k + 1
 	return SortedIndex
 	
-def prioritizeBasedOnCount(Index)
-	for ChosenPosition in range(0, Index - 1):
-		for Position in range(1, Index):
-			print("Compare chosen position len: %s and position len %s" %(len(Index[ChosenPosition]), len(Index[Position]))
-			if len(Index[ChosenPosition]) < len(Index[Position]):
+def prioritizeBasedOnCount(Index):
+	for ChosenPosition in range(0, len(Index) - 1):
+		for Position in range(1, len(Index)):
+			print("Compare chosen position len: %s and position len %s" %(len(Index[ChosenPosition]), len(Index[Position])))
+			PositionLen = len(Index[Position])
+			ChosenPositionLen = len(Index[ChosenPosition])
+			if ChosenPositionLen < PositionLen:
 				tmp = Index[Position]
 				Index[Position] = Index[ChosenPosition]
 				Index[ChosenPosition] = tmp

@@ -1,6 +1,6 @@
 from time import localtime, strftime
 
-def NormalizeWord(word):
+def Normalize(word):
 	print("Normalize %s" %word)
 	for Character in ['[', ']', '(', ')']:
 		word = word.replace(Character, "")

@@ -76,6 +76,6 @@ def updateDictionaryValues(word, LinePosition, WordPosition):
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	return true
 	
-def exportIndex
+def exportIndex:
 	return true
 	#not implemented
