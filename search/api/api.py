@@ -16,3 +16,7 @@ def isValid(string):
 	#Only implemented if the search string have to be meaningful
 	return true
 	
+def Display(SearchResult):
+	print("Hello kitty bitches: ")
+	print(SearchResult)
+	
