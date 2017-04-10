@@ -28,5 +28,5 @@ def Display(SearchResult):
 	print("Result in display for visualization: ")
 	print(SearchResult)
 	
-
-getSearchResult("../../../data/data.txt", "../../index/index.txt", u"caasm")
+#instruction on how to use:
+#getSearchResult("../../../data/data.txt", "../../index/index.txt", u"caasm")
