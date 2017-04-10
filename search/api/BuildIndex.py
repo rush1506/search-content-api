@@ -110,51 +110,62 @@ def exportIndex(OutputPath):
 def ImportIndex(DataPath):
 	with openToWrite(DataPath, mode='r', encoding="utf-8") as DataFile:
 		global WordIndex
-		Flag = 1
+		flag = 1
 		Word = ""
 		Line = 0
 		Position = 0
-		KeyLength = 0
+		KeyLength = -1
 		CountLine = 0
 		flagLine = 0
 		for line in DataFile:
+			print("Current line: %s" %line)
 			if line == "":
 				print("Reach EOF after reading, exit")
 				return 1
+			if CountLine == KeyLength:
+				print("Count line equal key length, reset flag")
+				flag = 1
 			if flag == 1:
 				Word = ""
 				Line = 0
 				Position = 0
 				CountLine = 0
-				KeyLength = line
+				KeyLength = int(getLineCharacter(line))
+				print("Key Length: %s" %KeyLength)
 				KeyLength = KeyLength - 1
 				flag = 2
-			if flag == 2:
-				Word = line
-				flag = 3
-			if flag == 3:
-				NewIndexEntry = [(Word, 1)]
-				for word, NewEntry in NewIndexEntry: 
-					WordIndex[word].append(NewEntry)
-				flag = 4
-			if flag == 4:
-				if CountLine == KeyLength:
-					flag = 1
-				else:
-					if flagLine == 0:
-						Line = line
-						flagLine = 1
-					else: 
-						Position = line
-						CountLine = CountLine + 1
-						flagLine = 0
-						NewPositionEntry = (Line, Position)
-						NewIndexEntry = [(Word, NewPositionEntry)]
+			else: 
+				if flag == 2:
+					Word = getLineCharacter(line)
+					print("word: %s" %Word)
+					flag = 3
+				else:	
+					if flag == 3:
+						WordCount = int(getLineCharacter(line))
+						print("word count: %s" %WordCount)
+						NewIndexEntry = [(Word, WordCount)]
 						for word, NewEntry in NewIndexEntry: 
 							WordIndex[word].append(NewEntry)
+						flag = 4
+					else:
+						if flag == 4:
+							if flagLine == 0:
+								Line = getLineCharacter(line)
+								flagLine = 1
+							else: 
+								Position = getLineCharacter(line)
+								CountLine = CountLine + 1
+								flagLine = 0
+								NewPositionEntry = (Line, Position)
+								NewIndexEntry = [(Word, NewPositionEntry)]
+								for word, NewEntry in NewIndexEntry: 
+									WordIndex[word].append(NewEntry)
+	print("The word index: ")
+	print(WordIndex)
 	return WordIndex
 					
-				
-				
-				
-	#not implemented
+def getLineCharacter(line):
+	LineCharacterMap = line.split()
+	print("Line character map: ")
+	print(LineCharacterMap)
+	return LineCharacterMap[0]

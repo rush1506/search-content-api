@@ -23,7 +23,7 @@ def isValid(string):
 	return 1
 		
 def Display(SearchResult):
-	print("Hello kitty bitches: ")
+	print("Result in displya for visualization: ")
 	print(SearchResult)
 	
 

@@ -89,28 +89,28 @@ def sortMatchPosition(Index, WordList):
 			print("imember: %s in word list position: %s" %(imember, WordPositioni))
 			print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))	
 			count = count + 1
+			SortedIndex[count].append(imember)
 			for WordPositionj in range(1, len(Index)):
 				print("Word Position j: %s" %WordPositionj)
 				print("Word j: %s" %WordList[WordPositionj])
 				print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 				j = 0
-				PopList = ()
+				PopList = []
 				for jmember in Index[WordList[WordPositionj]]:
 					print ("jmember: %s in word list position: %s" %(jmember, WordPositionj))
 					print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 					if imember[0] == jmember[0]:
 						print("in the same line")
 						print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
-						SortedIndex[count].append(imember)
-						PopList
-						Index[WordList[WordPositionj]].pop(j)
+						SortedIndex[count].append(jmember)
+						PopList.append(j)
 					j = j + 1
-			Index[WordList[WordPositioni]].pop(i)
+				for MustDeletePosition in PopList:
+					Index[WordList[WordPositionj]].pop(MustDeletePosition)
 		i = i + 1
 	print("Sorted Index: ")
 	print(SortedIndex)
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
-	input()
 	return SortedIndex
 	
 def prioritizeBasedOnCount(Index, WordList):
