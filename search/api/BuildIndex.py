@@ -1,4 +1,3 @@
-from codecs import open as openCodec
 from Normalize import Normalize
 from time import localtime, strftime
 from collections import defaultdict

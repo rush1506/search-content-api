@@ -3,18 +3,20 @@ from BuildIndex import BuildIndex
 from BuildIndex import ImportIndex
 from SearchIndex import isSearchable
 from collections import defaultdict
+from DisplayResult import getResultFromFile
 
-def getSearchResult(SearchString):
+def getSearchResult(DataPath, IndexPath, SearchString):
 	#if (0 == isValid(SearchString)):
 	#	return "no result found, search string is not valid"
-	if (isSearchable("../../index/index.txt") == 0):
+	if (isSearchable(IndexPath) == 0):
 		print("There are no index file, building one")
-		WordIndex = BuildIndex("../../../data/data.txt", "../../index/index.txt")
+		WordIndex = BuildIndex(DataPath, IndexPath)
 	else:
 		print("Found index file, getting index")
-		WordIndex = ImportIndex("../../index/index.txt")
+		WordIndex = ImportIndex(IndexPath)
 	SearchResult = SearchIndex(SearchString, WordIndex)
-	Display(SearchResult)
+	LineQuery = getResultFromFile(DataPath, SearchResult)
+	Display(LineQuery)
 	return SearchResult
 	
 def isValid(string):
@@ -23,8 +25,8 @@ def isValid(string):
 	return 1
 		
 def Display(SearchResult):
-	print("Result in displya for visualization: ")
+	print("Result in display for visualization: ")
 	print(SearchResult)
 	
 
-getSearchResult(u"hành tinh")
+getSearchResult("../../../data/data.txt", "../../index/index.txt", u"caasm")
