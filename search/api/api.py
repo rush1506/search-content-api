@@ -7,7 +7,7 @@ from collections import defaultdict
 def getSearchResult(SearchString):
 	#if (0 == isValid(SearchString)):
 	#	return "no result found, search string is not valid"
-	if (isSearchable("../../../data/data.txt") == 0):
+	if (isSearchable("../../index/index.txt") == 0):
 		print("There are no index file, building one")
 		WordIndex = BuildIndex("../../../data/data.txt", "../../index/index.txt")
 	else:
@@ -27,4 +27,4 @@ def Display(SearchResult):
 	print(SearchResult)
 	
 
-getSearchResult(u"hành")
+getSearchResult(u"hành tinh")

@@ -9,7 +9,7 @@ WordIndex = defaultdict(list)
 def BuildIndex(DataPath, OutputPath):
 	print("Enter %s" %DataPath)
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
-	with openCodec(DataPath, 'r', "utf-8") as DataFile:
+	with openToWrite(DataPath, mode='r', encoding="utf-8") as DataFile:
 		print("Open %s" %DataPath)
 		print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 		LinePosition = 0
@@ -102,12 +102,13 @@ def exportIndex(OutputPath):
 				print("Position: %s" %WordIndex[KeyWord][i][1])
 				print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 				outDataFile.write(str(WordIndex[KeyWord][i][0]))
+				outDataFile.write("\n")
 				outDataFile.write(str(WordIndex[KeyWord][i][1]))
 				outDataFile.write("\n")
 	return 1
 	
 def ImportIndex(DataPath):
-	with openCodec(DataPath, 'r', "utf-8") as DataFile:
+	with openToWrite(DataPath, mode='r', encoding="utf-8") as DataFile:
 		global WordIndex
 		Flag = 1
 		Word = ""
