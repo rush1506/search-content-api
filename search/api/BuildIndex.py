@@ -1,14 +1,15 @@
-from codecs import open	
+from codecs import open as openCodec
 from Normalize import Normalize
 from time import localtime, strftime
 from collections import defaultdict
+from io import open as openToWrite
 
 WordIndex = defaultdict(list)
 
 def BuildIndex(DataPath, OutputPath):
 	print("Enter %s" %DataPath)
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
-	with open(DataPath, 'r', "utf-8") as DataFile:
+	with openCodec(DataPath, 'r', "utf-8") as DataFile:
 		print("Open %s" %DataPath)
 		print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 		LinePosition = 0
@@ -33,11 +34,11 @@ def updateNewIndexFrom(CurrentLine, LinePosition):
 		print("Normalize %s at position %s" %(RawWord, WordPosition))
 		print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 		nWord = Normalize(RawWord)
-		print("Add %s to words' dictionary" %(nWord, WordPosition))
+		print("Add %s to words' dictionary in position %s" %(nWord, WordPosition))
 		print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 		updateDictionary(nWord, LinePosition, WordPosition)
 		WordPosition = WordPosition + 1
-	return true
+	return 1
 	
 def updateDictionary(word, LinePosition, WordPosition):
 	global WordIndex
@@ -74,8 +75,85 @@ def updateDictionaryValues(word, LinePosition, WordPosition):
 	print("Append to word index: ")
 	print(NewPositionEntry)
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
-	return true
+	return 1
 	
-def exportIndex():
-	return true
+def exportIndex(OutputPath):
+	print("Create and open datafile for writing %s" %OutputPath)
+	createFile = open(OutputPath, 'w+')
+	createFile.close()
+	with openToWrite(OutputPath, mode='a+', encoding="utf-8") as outDataFile:		
+		global WordIndex
+		for KeyWord in WordIndex:
+			print("Print keyword's array length to file, curren len: %s" %len(WordIndex[KeyWord]))
+			print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
+			tempLength = len(WordIndex[KeyWord])
+			outDataFile.write(str(tempLength))
+			outDataFile.write("\n")
+			print("Print keyword %s to file" %KeyWord)
+			print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
+			outDataFile.write(KeyWord)
+			outDataFile.write("\n")
+			print("Print word count: %s to file" %WordIndex[KeyWord][0])
+			print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
+			outDataFile.write(str(WordIndex[KeyWord][0]))
+			outDataFile.write("\n")
+			for i in range(1, len(WordIndex[KeyWord])):
+				print("Line: %s" %WordIndex[KeyWord][i][0])
+				print("Position: %s" %WordIndex[KeyWord][i][1])
+				print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
+				outDataFile.write(str(WordIndex[KeyWord][i][0]))
+				outDataFile.write(str(WordIndex[KeyWord][i][1]))
+				outDataFile.write("\n")
+	return 1
+	
+def ImportIndex(DataPath):
+	with openCodec(DataPath, 'r', "utf-8") as DataFile:
+		global WordIndex
+		Flag = 1
+		Word = ""
+		Line = 0
+		Position = 0
+		KeyLength = 0
+		CountLine = 0
+		flagLine = 0
+		for line in DataFile:
+			if line == "":
+				print("Reach EOF after reading, exit")
+				return 1
+			if flag == 1:
+				Word = ""
+				Line = 0
+				Position = 0
+				CountLine = 0
+				KeyLength = line
+				KeyLength = KeyLength - 1
+				flag = 2
+			if flag == 2:
+				Word = line
+				flag = 3
+			if flag == 3:
+				NewIndexEntry = [(Word, 1)]
+				for word, NewEntry in NewIndexEntry: 
+					WordIndex[word].append(NewEntry)
+				flag = 4
+			if flag == 4:
+				if CountLine == KeyLength:
+					flag = 1
+				else:
+					if flagLine == 0:
+						Line = line
+						flagLine = 1
+					else: 
+						Position = line
+						CountLine = CountLine + 1
+						flagLine = 0
+						NewPositionEntry = (Line, Position)
+						NewIndexEntry = [(Word, NewPositionEntry)]
+						for word, NewEntry in NewIndexEntry: 
+							WordIndex[word].append(NewEntry)
+	return WordIndex
+					
+				
+				
+				
 	#not implemented

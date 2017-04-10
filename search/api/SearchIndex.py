@@ -7,9 +7,9 @@ from collections import Counter
 def isSearchable(DataPath):
 	DataFile = Path(DataPath)
 	if DataFile.is_file():
-		return true
+		return 0
 	else:
-		return false
+		return 1
 
 def SearchIndex(SearchString, WordIndex):
 	print("Get word list from search string %s" %SearchString)
@@ -20,6 +20,9 @@ def SearchIndex(SearchString, WordIndex):
 	print("Get index from database")
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	SearchStringIndex = getIndexFromDatabase(WordIndex, WordList)
+	print("Search string's index: ")
+	print(SearchStringIndex)
+	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	#print("Trim index")
 	#print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	#SearchStringIndex = trimSearchIndex(SearchStringIndex)
@@ -38,14 +41,14 @@ def getWordListCount(SearchString):
 	print("Get word count from string %s" %SearchString)
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	wordsList = SearchString.split()
-	wordCount = Counter(wordsList)
+	wordCount = len(wordsList)
 	print("Word count: %s" %wordCount)
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	return wordCount
 
 def trimSearchIndex(SearchStringIndex):
 	#not implemented
-	return true
+	return 1
 
 def sortIndex(SearchStringIndex, WordsCount):
 	SortedIndex = defaultdict(list)
@@ -55,7 +58,7 @@ def sortIndex(SearchStringIndex, WordsCount):
 	print("Sort index based on single count in document")
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	SortedIndex = prioritizeBasedOnCount(SortedIndex)
-	rint("Sort index based on heuristic distance, not implemented yet")
+	print("Sort index based on heuristic distance, not implemented yet")
 	print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	SortedIndex = prioritizeBasedDistance(SortedIndex)
 	return SortedIndex
@@ -109,12 +112,12 @@ def getIndexFromDatabase(WordIndex, WordList):
 		print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 		i = 0
 		for PositionList in WordIndex[word]:
-			if 0 == i:
+			if i == 0:
 				print("skip word count")
 			else:
 				SearchIndex[i].append(WordIndex[word][i])
 			i = i + 1
 		print("Curent index for %s" %word)
-		print(SearchIndex[word])
+		print(SearchIndex[i])
 		print("Timestamp: " + strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 	return SearchIndex
