@@ -15,6 +15,8 @@ def getSearchResult(DataPath, IndexPath, SearchString):
 		print("Found index file, getting index")
 		WordIndex = ImportIndex(IndexPath)
 	SearchResult = SearchIndex(SearchString, WordIndex)
+	print("Search Result:")
+	print(SearchResult)
 	LineQuery = getResultFromFile(DataPath, SearchResult)
 	Display(LineQuery)
 	return SearchResult
@@ -29,4 +31,4 @@ def Display(SearchResult):
 	print(SearchResult)
 	
 #instruction on how to use:
-#getSearchResult("../../../data/data.txt", "../../index/index.txt", u"caasm")
+#getSearchResult("../../../data/data.txt", "../../index.txt", u"tinh")

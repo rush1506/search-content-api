@@ -2,9 +2,6 @@ from io import open
 def getResultFromFile(DataPath, Index):
 	LineQuery =[] 
 	print("get line from data file")
-	if not Index[0]:
-		print("Words doesn't have any matching case")
-		return LineQuery
 	for LineSet in Index:
 		print("current line position: %s" %Index[LineSet][0][0])
 		Line = seekFromFile(DataPath, Index[LineSet][0][0])
