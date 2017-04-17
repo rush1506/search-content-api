@@ -31,4 +31,4 @@ def Display(SearchResult):
 	print(SearchResult)
 	
 #instruction on how to use:
-#getSearchResult("../../../data/data.txt", "../../index.txt", u"tinh")
+getSearchResult("../../../data/data.txt", "../../index.txt", u"hành tinh")
